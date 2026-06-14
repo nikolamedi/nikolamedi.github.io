@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nikola Medimorec – Better transport for a better world</title>
+  <meta name="description" content="Nikola Medimorec – Director of Data Analysis and Research at SLOCAT Partnership. Research and advocacy on sustainable transport, climate change and the Global South." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════
+       LIGHT THEME — clean, typography-first
+       ═══════════════════════════════════════ */
+    :root {
+      --bg:         #ffffff;
+      --bg-alt:     #f7f7f5;
+      --nav-bg:     #ffffff;
+      --text:       #1a1a1a;
+      --muted:      #5a5a5a;
+      --subtle:     #8a8a8a;
+      --link:       #1a6bbf;
+      --hover-bg:   #f0f0ee;
+      --rule:       #e5e5e3;
+      --nav-h:      64px;
+      --max:        960px;
+      --sans:       'Lato', sans-serif;
+      --display:    'Raleway', sans-serif;
+      --radius:     6px;
+      --transition: 0.18s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; display: block; }
+
+    /* ── NAVBAR ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--rule);
+      z-index: 1000;
+      transition: box-shadow var(--transition);
+    }
+    #navbar.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.08); }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.1rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius);
+      transition: color var(--transition), background var(--transition);
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text);
+      background: var(--hover-bg);
+    }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+    }
+
+    /* ── SHARED SECTION STYLES ── */
+    section { padding: 72px 2rem; }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--text);
+    }
+
+    .section-rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── HERO ── */
+    #design {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--nav-h);
+      background: var(--bg-alt);
+    }
+
+    .design-grid {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .design-name {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .design-title {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 400;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .design-desc {
+      max-width: 480px;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .design-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.55rem 1.3rem;
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      background: var(--text);
+      color: var(--bg);
+    }
+    .btn:hover { background: #333; text-decoration: none; }
+    .btn-primary { background: var(--text); color: var(--bg); }
+    .btn-primary:hover { background: #333; }
+
+    .design-socials {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--hover-bg);
+      color: var(--muted);
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .social-icon:hover { background: var(--rule); color: var(--text); text-decoration: none; }
+    .social-icon svg { width: 17px; height: 17px; fill: currentColor; }
+
+    .design-photo-wrap { flex-shrink: 0; }
+
+    .design-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--rule);
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .about-photo {
+      width: 100%;
+      border-radius: var(--radius);
+    }
+
+    .about-text h3 {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 0.94rem;
+    }
+
+    .label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin: 1.25rem 0 0.5rem;
+    }
+
+    .lang-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .lang-chip {
+      background: var(--hover-bg);
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      font-weight: 400;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg-alt); }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1.5rem;
+      padding: 1.1rem 0.75rem;
+      border-radius: var(--radius);
+      transition: background var(--transition);
+    }
+    .timeline-item:hover { background: var(--hover-bg); }
+
+    .timeline-date {
+      font-size: 0.75rem;
+      color: var(--subtle);
+      font-weight: 400;
+      padding-top: 0.15rem;
+      line-height: 1.5;
+    }
+
+    .timeline-body h3 {
+      font-family: var(--display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.1rem;
+    }
+
+    .timeline-body h4 {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-body p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .dl-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--link);
+      text-decoration: none;
+    }
+    .dl-link:hover { text-decoration: underline; }
+
+    /* ── PUBLICATIONS ── */
+    #publications { background: var(--bg-alt); }
+
+    .pub-tabs {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .pub-tab {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: var(--sans);
+    }
+    .pub-tab:hover { background: var(--hover-bg); color: var(--text); }
+    .pub-tab.active { background: var(--text); color: var(--bg); }
+
+    .pub-panel { display: none; }
+    .pub-panel.active { display: block; }
+
+    .pub-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pub-list li {
+      padding: 0.9rem 0.75rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+      border-radius: var(--radius);
+      transition: background var(--transition);
+    }
+    .pub-list li:hover { background: var(--hover-bg); }
+    .pub-list li + li { border-top: 1px solid var(--rule); }
+    .pub-list li a { color: var(--link); font-weight: 600; }
+    .pub-list li em { font-style: italic; color: var(--subtle); }
+
+    /* ── SUSTAINABLE TRANSPORT ── */
+    #transport { background: var(--bg); }
+
+    .transport-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .transport-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.1rem 0.75rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text);
+      transition: background var(--transition);
+    }
+    .transport-link:hover { background: var(--hover-bg); text-decoration: none; }
+    .transport-link + .transport-link { border-top: 1px solid var(--rule); }
+
+    .transport-link-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+    .transport-link h3 {
+      font-family: var(--display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      color: var(--text);
+    }
+
+    .transport-link p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg-alt); }
+
+    #contact p {
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 1.5rem;
+      font-size: 0.94rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--rule);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    footer p { color: var(--subtle); font-size: 0.8rem; }
+    footer a { color: var(--subtle); }
+    footer a:hover { color: var(--text); }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── SCROLL TO TOP ── */
+    #scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 38px; height: 38px;
+      background: var(--text);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: var(--transition);
+      z-index: 999;
+      border: none;
+    }
+    #scroll-top.visible { opacity: 1; transform: translateY(0); }
+    #scroll-top svg { width: 16px; height: 16px; fill: var(--bg); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; flex-direction: column; gap: 0;
+        position: absolute; top: var(--nav-h); left: 0; right: 0;
+        background: var(--nav-bg); border-bottom: 1px solid var(--rule);
+        padding: 0.75rem 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.65rem 2rem; }
+      .hamburger { display: flex; }
+
+      .design-grid { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+      .design-desc { margin: 0 auto 2rem; }
+      .design-buttons { justify-content: center; }
+      .design-socials { justify-content: center; }
+      .design-photo-wrap { order: -1; display: flex; justify-content: center; }
+      .design-photo { width: 150px; height: 150px; }
+
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo { max-width: 180px; margin: 0 auto; }
+
+      .timeline-item, .edu-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .timeline-date, .edu-date { font-size: 0.72rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <span class="nav-brand">Nikola Medimorec</span>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ design ═══════════ -->
+<section id="design">
+  <div class="design-grid">
+    <div class="design-text">
+      <h1 class="design-name">Nikola <span>Medimorec</span></h1>
+      <p class="design-title">Better transport for a better world</p>
+      <p class="design-desc">
+        I help governments, international organisations and development partners understand and accelerate 
+        the implementation of sustainable, low-carbon transport 
+        through research, data analysis and policy insights.
+        My work supports global and regional efforts to create sustainable, low-carbon mobility systems and evidence-based decision making.
+      </p>
+      <div class="design-buttons">
+        <a class="btn" href="#about">About Me</a>
+        <a class="btn" href="#contact">Get in Touch</a>
+      </div>
+      <div class="design-socials">
+        <!-- LinkedIn -->
+        <a class="social-icon" href="https://www.linkedin.com/in/nikola-medimorec-b0b72030/" target="_blank" rel="noopener" title="LinkedIn">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <!-- GitHub -->
+        <a class="social-icon" href="https://github.com/nikolamedi" target="_blank" rel="noopener" title="GitHub">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <!-- ORCID -->
+        <a class="social-icon" href="https://orcid.org/0000-0003-2935-7495" target="_blank" rel="noopener" title="ORCID">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.184H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.159-5.325 5.159h-3.919V7.416zm1.444 1.303v7.572h2.297c3.272 0 3.9-2.484 3.9-3.861 0-1.691-.819-3.711-3.934-3.711h-2.263z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="design-photo-wrap">
+      <img
+        class="design-photo"
+        src="images/nikola_medimorec.jpg?fit=600%2C600&ssl=1"
+        alt="Nikola Medimorec"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About Me</h2>
+    <hr class="section-rule">
+    <div class="about-grid">
+      <div>
+        <img
+          class="about-photo"
+          src="images/nikola_yeosu.jpg?fit=600%2C600&ssl=1"
+          alt="Nikola Medimorec"
+        />
+      </div>
+      <div class="about-text">
+        <h3>Director of Data Analysis and Research at SLOCAT Partnership</h3>
+        <p>
+          I am a skilled researcher working at the intersection of sustainable transport, climate action and evidence-driven advocacy. 
+          Over the years, I have supported governments, the international transport community and 
+          development partners in advancing sustainable, low-carbon transport. 
+        </p>
+        <p>
+          Currently, I lead the research work for the SLOCAT Partnership, developing methodologies,
+          strategies and tools in support of knowledge products and advocacy. 
+          My expertise spans data analysis, policy analysis, climate finance and research in the context of 
+          global processes on climate change and sustainable development, with a focus on the Global South.
+          I have been based in Seoul (Republic of Korea) since 2012.
+        </p>
+	    <p></p>
+        <p class="label">Education</p>
+        <div class="lang-chips">
+          <span class="lang-chip">Master of Arts - Seoul National University</span>
+          <span class="lang-chip">Bachelor of Science in Applied Geography - University of Trier</span>
+        </div>
+        <p class="label">Focus areas</p>
+        <div class="lang-chips">
+          <span class="lang-chip">Nationally Determined Contributions (NDCs)</span>
+          <span class="lang-chip">Avoid-Shift-Improve</span>
+          <span class="lang-chip">Data and research</span>
+          <span class="lang-chip">Freight Transport</span>
+        </div>
+	    <p></p>
+        <p class="label">Languages</p>
+        <div class="lang-chips">
+          <span class="lang-chip">Croatian - Native</span>
+          <span class="lang-chip">German - Native</span>
+          <span class="lang-chip">English - Fluent</span>
+          <span class="lang-chip">Korean - Proficient</span>
+          <span class="lang-chip">French - Beginner</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ EXPERIENCE ═══════════ -->
+<section id="experience">
+  <div class="container">
+    <h2 class="section-title">Work Experience</h2>
+    <hr class="section-rule">
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">Oct 2021 – Present</div>
+        <div class="timeline-body">
+          <h3>Director, Data Analysis and Research</h3>
+          <h4>SLOCAT Partnership</h4>
+          <p>Leading SLOCAT's research work by developing methodologies, strategies and tools in support of knowledge products and advocacy. Conducting and overseeing research and data analysis for flagship reports including the Transport, Climate and Sustainability Global Status Report. Managing the SLOCAT–VREF Young Leaders in Sustainable Transport programme.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Jul 2017 – Sep 2021</div>
+        <div class="timeline-body">
+          <h3>Senior Researcher</h3>
+          <h4>SLOCAT Partnership</h4>
+          <p>Conducted data collection and analysis for knowledge products and advocacy activities. Led production of all figures, key indicators and data for the first SLOCAT Global Status Report on Transport, Climate and Sustainability.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Dec 2016 – Jun 2017</div>
+        <div class="timeline-body">
+          <h3>Research Consultant</h3>
+          <h4>SLOCAT Partnership</h4>
+          <p>Delivered research and data for country fact sheets, reports and public interventions. Introduced new techniques and tools to improve operations and knowledge management.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Oct 2015 – Dec 2016</div>
+        <div class="timeline-body">
+          <h3>Green Transport Consultant</h3>
+          <h4>Global Green Growth Institute (GGGI)</h4>
+          <p>Supported sustainable transport activities. Developed an indicator-based assessment and conceptual approach to map suitable policy actions for developing countries' transport needs.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2015 and before</div>
+        <div class="timeline-body">
+          <h3>Various Consultancies, internships and teaching assistant</h3>
+          <h4>The Korea Transport Institute (KOTI), CITYNET Asia-Pacific, University of Trier</h4>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PUBLICATIONS ═══════════ -->
+<section id="publications">
+  <div class="container">
+    <h2 class="section-title">Publications &amp; Presentations</h2>
+    <hr class="section-rule">
+
+    <div class="pub-tabs">
+      <button class="pub-tab active" onclick="showTab('major')">Major Publications</button>
+      <button class="pub-tab" onclick="showTab('scientific')">Scientific Articles</button>
+      <button class="pub-tab" onclick="showTab('articles')">Other Articles</button>
+      <button class="pub-tab" onclick="showTab('media')">Interviews &amp; Media</button>
+      <button class="pub-tab" onclick="showTab('presentations')">Presentations</button>
+    </div>
+
+    <!-- Major -->
+    <div class="pub-panel active" id="tab-major">
+      <ul class="pub-list">
+        <li>Nikola Medimorec (2023). In-depth Report on Inland Transport and Climate Change, Part 1: Getting towards net zero – Status, Projections and GHG Emissions Trends. Background report for UNECE ITC, ECE/TRANS/2024/4. <a href="https://unece.org/sites/default/files/2023-12/ECE_TRANS_2024_04e_0.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Nikola Medimorec (2023). In-depth Report on Inland Transport and Climate Change, Part 2: Decarbonization Policy Commitments, Challenges and Opportunities. Background report for UNECE ITC, ECE/TRANS/2024/5.</li>
+        <li>Ankunda G., Cardama M. et al. (2023). SLOCAT Transport, Climate and Sustainability Global Status Report, 3rd Edition. <a href="https://tcc-gsr.com/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Nikola Medimorec and Maruxa Cardama (2022). Climate Strategies for Transport: An Analysis of NDCs and Long-Term Strategies, October 2022 Update. SLOCAT. <a href="https://slocat.net/ndcs/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Nikola Medimorec, Maruxa Cardama et al. (2021). Climate Strategies for Transport: An Analysis of NDCs and Long-Term Strategies. <a href="https://slocat.net/climate-strategies-for-transport/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Cardama M., Cortez A. et al. (2021). Tracking Trends in a Time of Change: Transport and Climate Change Global Status Report – 2nd edition. <a href="https://tcc-gsr.com/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Enriquez A., Gota S., Huizenga C. and Nikola Medimorec (2020). Asian Transport Outlook. <a href="https://slocat.net/ATO/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Ochs A. et al. (2020). Roadmap for the Integration of Sustainable Energy and Transport in Small Islands. APEC. <a href="https://www.apec.org/Publications/2020/11/Roadmap-for-the-Integration-of-Sustainable-Energy-and-Transport-in-Small-Islands" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Nikola Medimorec et al. (2020). Impacts of COVID-19 on Mobility: Preliminary analysis of regional trends on urban mobility. SLOCAT. <a href="https://slocat.net/covid-19-impact-mobility/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Peet K., Gota S., Nikola Medimorec, Cardama M. (2020). Transport, Climate Action and Sustainable Development: Synergies across NDCs and VNRs in IsDB Member Countries. <a href="https://slocat.net/isdb-slocat-sustainable-transport/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Peet K., Gota S., Huizenga C., Nikola Medimorec et al. (2018). Transport and Climate Change 2018 – Global Status Report. <a href="http://slocat.net/tcc-gsr" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Yiu A., Peet K., Nikola Medimorec and Dalkmann H. (2018). 2018 Voluntary National Reviews: Showcasing the Critical Role of the Transport Sector to Achieve the SDGs. <a href="http://www.slocat.net/vnr2018" target="_blank" rel="noopener">→ Read</a></li>
+      </ul>
+    </div>
+
+    <!-- Scientific -->
+    <div class="pub-panel" id="tab-scientific">
+      <ul class="pub-list">
+        <li>Fulton, L.M., Medimorec, N., Serafimova, T., Ankunda, G., Cazzola, P., Teter, J., Andrieu, V.-M., Lah, O. and Mejia, A. (2025). Benchmarking Sustainable, Low-Carbon Transport in Low- and Middle-Income Countries Through a Novel Indicator Assessment. Sustainability 2025, 17, 1657. <a href="https://doi.org/10.3390/su17041657" target="_blank" rel="noopener">→ Read</a></li>
+		<li>Dixon, J. et al. (2026). The Transport Data Commons: operationalising FAIR data for global sustainable mobility transitions. Zenodo. <a href="https://doi.org/10.5281/zenodo.18965206" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Tan, N., Ambunda, R., Medimorec, N., Cortez, A., Krapp, A., Maxwell, E., Harrison, J., and Howells, M. (2024) Transport starter data kit: Historical passenger and freight transport data for selected countries in Africa, Asia, and South America, Data in Brief, Volume 57. <a href="https://doi.org/10.1016/j.dib.2024.110984" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Bakker S. et al. (2019). Low-Carbon Quick Wins: Integrating Short-Term Sustainable Transport Options in Climate Policy in Low-Income Countries. <em>Sustainability</em> 11(16), 4369. <a href="https://www.mdpi.com/2071-1050/11/16/4369" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Gota S., Huizenga C., Peet K., Nikola Medimorec and Bakker S. (2019). Decarbonising transport to achieve Paris Agreement targets. <em>Energy Efficiency</em> 12, 363. <a href="https://link.springer.com/article/10.1007/s12053-018-9671-3" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Nikola Medimorec (2018). Bicycles, the Origin of Sustainable Mobility. Chapter 6 in: Korean Society of Transportation, <em>Connection of Time and Space, Transportation Story</em> (in Korean).</li>
+        <li>Kang J. S. and Nikola Medimorec (2016). Green Transport Assessment Methodology: A Two-Stage Framework for Indicator-Based Assessment and Policy Mapping. Fourth Green Growth Knowledge Platform Annual Conference. <a href="https://www.greengrowthknowledge.org/sites/default/files/D4_Kang_Green_transport_assessment_methodology.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Nikola Medimorec, Ross G. and Weber I. M. (2014). Kim Ae-ran: Die Achse eines Tages. <em>Hefte für ostasiatische Literatur</em> 56.</li>
+      </ul>
+    </div>
+
+    <!-- Articles -->
+    <div class="pub-panel" id="tab-articles">
+      <ul class="pub-list">
+        <li>Nikola Medimorec (2022). Sustainable transport in African cities: Challenges and opportunities through the 15-minute city planning approach. SLOCAT. <a href="https://slocat.net/15-minute-city-planning-african-cities/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Peet K., Nikola Medimorec, Yiu A. (2020). Infographic on Good Practices on Transport for Climate Action and Sustainable Development. <a href="http://slocat.net/wp-content/uploads/2020/09/IsDB-SLOCAT-Infographic_webuse.pdf" target="_blank" rel="noopener">→ View</a></li>
+        <li>Nikola Medimorec, Gioutsos D. and Ochs A. (2020). Energy and transport profile: Cat Ba Island, Viet Nam. <a href="https://sd-strategies.com/wp-content/uploads/2020/06/Profile_CatBa_Island.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Ibold S., Nikola Medimorec, Wagner, A. and Peruzzo, J. (2020). The COVID-19 outbreak and implications to sustainable urban mobility. TUMI. <a href="https://www.transformative-mobility.org/news/the-covid-19-outbreak-and-implications-to-public-transport-some-observations" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Nikola Medimorec (2020). Seoul to implement record number of transport projects in 2020. <em>Korea Times</em>. <a href="https://www.koreatimes.co.kr/www/nation/2020/01/281_281505.html" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Nikola Medimorec (2019). Narrative around Seoul's new bicycle paths plans – masterpiece of storytelling. <em>Korea Times</em>. <a href="https://www.koreatimes.co.kr/www/nation/2019/09/281_274280.html" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Nikola Medimorec (2019). In need of Seoul's next transport revolution. <em>Korea Times</em>. <a href="https://www.koreatimes.co.kr/www/nation/2019/07/281_271606.html" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Tebay A. and Nikola Medimorec (2016). A K-Transportation Wave? Korea's smart transport technology is adopted worldwide. <em>KOREA Magazine</em> vol. 12, no. 6, p. 44–45.</li>
+        <li>Nikola Medimorec (2016). Incheon Airport maglev line opens. <em>International Railway Journal</em>. <a href="http://www.railjournal.com/index.php/asia/incheon-airport-maglev-line-opens.html" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Nikola Medimorec (2014). Cycling Jeju Island: Tips and recommendations. <em>Jeju Weekly</em>. <a href="http://www.jejuweekly.com/news/articleView.html?idxno=4325" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Nikola Medimorec (2013). Sustainable Transportation: A Basic Human Right. <em>CityNet Asia-Pacific</em>. <a href="https://citynetmembers.wordpress.com/2013/07/29/418/" target="_blank" rel="noopener">→ Read</a></li>
+      </ul>
+    </div>
+
+    <!-- Media -->
+    <div class="pub-panel" id="tab-media">
+      <ul class="pub-list">
+        <li>Jon Dunbar (2018). Kojects author maps Seoul Metro aboveground. <em>Korea Times</em>. <a href="https://www.koreatimes.co.kr/www/nation/2018/07/177_252720.html" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Pedestrians.org (2017). Pedestrian Environment in Korea. <a href="https://www.youtube.com/watch?v=UtxLJwW4gI4" target="_blank" rel="noopener">→ Watch</a></li>
+        <li>KBS World Radio (2016). Andy Tebay &amp; Nikola Medimorec, Co-authors, KOJECTS. <a href="http://world.kbs.co.kr/service/contents_view.htm?lang=e&menu_cate=people&id=&board_seq=156439&page=4" target="_blank" rel="noopener">→ Listen</a></li>
+        <li>Korea Economic Institute (2016). Korea Kontext: Tracking Korea's Transportation System with Kojects. <a href="http://www.keia.org/podcast/tracking-korea%E2%80%99s-transportation-system-kojects" target="_blank" rel="noopener">→ Listen</a></li>
+        <li>Colin Marshall (2016). One of Korea's Most Popular Cartoons Is About a Bus. <em>Los Angeles Review of Books</em>. <a href="https://blog.lareviewofbooks.org/the-korea-blog/one-koreas-popular-cartoons-bus/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Fernando Casado Cañeque &amp; Paula García Serna (2016). Towards The Human City, To Global Leaders. <a href="https://vimeo.com/182120189" target="_blank" rel="noopener">→ Watch</a></li>
+        <li>Chance Dorland (2016). Seoul Bicycle FAIL: Riders Question Rampless Bike Crossings. <em>KoreaFM</em>. <a href="http://www.koreafm.net/2016/07/seoul-bicycle-fail/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Kyung-min Lee (2016). Bike crossings inconvenient for users. <em>Korea Times</em>. <a href="http://www.koreatimes.co.kr/www/nation/2019/05/113_206705.html" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Notebook on Cities and Culture's Korea Tour: Why Is This Here? with Nikola Medimorec (2014). <a href="http://blog.colinmarshall.org/?p=2625" target="_blank" rel="noopener">→ Listen</a></li>
+        <li>KBS World Radio (2011). Verkehrsplanungspraktikant Nikola Medimorec, Treffen zweier Welten. <a href="http://world.kbs.co.kr/german/program/program_seoulreport_detail.htm?No=3875&current_page=22" target="_blank" rel="noopener">→ Listen</a></li>
+      </ul>
+    </div>
+
+    <!-- Presentations -->
+    <div class="pub-panel" id="tab-presentations">
+      <ul class="pub-list">
+        <li>UNFCCC Climate Week 3. 21-25 April 2026. <a href="https://www.youtube.com/watch?v=G1jSdnaZon0&list=PLBcZ22cUY9RIf0TQ0PpU2ntLDXD64drzn" target="_blank" rel="noopener">→ Watch</a></li>
+        <li>NDC Partnership, Youth Engagement Forum 2023. Teach-in session: Accelerating Sustainable Transport – Empowering African Youth for Climate Action. 6 July 2023.</li>
+        <li>UNESCAP, Regional Cooperation Mechanism on Low Carbon Transport, Almaty, Kazakhstan. Multi-stakeholder mobilisation. 21 June 2023.</li>
+        <li>GIZ, Transport and Climate Change Week 2022. Pitch on the Tracker of Climate Strategies for Transport. 11 May 2022.</li>
+        <li>UNCRD, High-Level 14th Regional EST Forum in Asia, Aichi, Japan. Panelist: Increasing Resilience through Sustainable Transport Solutions. 19 October 2021.</li>
+        <li>UNCRD / ADB / NDC-TIA / SLOCAT, EST Forum Pre-Event. Facilitation: Decarbonizing Asia's Transport Sector. 12 October 2021.</li>
+        <li>IRF Young Professionals Summit 2021. Financing climate action in transport. 29 September 2021.</li>
+        <li>WCTRS SIG F2. Moderation: Decarbonizing the Transport Sector through Innovative Technologies. 20 September 2021. <a href="https://slocat.net/wctrs-workshop-2021/" target="_blank" rel="noopener">→ More</a></li>
+        <li>ASIA LEDS Forum 2021. Enabling environment for electric mobility in public transport. 2 September 2021.</li>
+        <li>Asia-Pacific Climate Week. Transport and Climate Change in Asia-Pacific. 8 July 2021.</li>
+        <li>SLOCAT Webinar, 2nd edition Global Status Report. 6 July 2021. <a href="https://www.youtube.com/watch?v=iON_fdbAj2s" target="_blank" rel="noopener">→ Watch</a></li>
+        <li>UNESCAP Asia-Pacific Mayors Academy. Sustainable transport. 22 June 2021.</li>
+        <li>UNITAR CIFAL Jeju. Scaling-up Renewable Energy Ambition in Future Transport. 6 May 2021. <a href="https://www.youtube.com/watch?v=TrpTBSnhaJw" target="_blank" rel="noopener">→ Watch</a></li>
+        <li>IGLUS Online Mobility Module. Sustainable mobility in Seoul. 26 November 2020.</li>
+        <li>GIZ-SLOCAT Workshop. Tracking progress in Asia's transport transformation. 5 November 2020.</li>
+        <li>Asia LEDS GP Webinar. E-mobility: Global trends and opportunities for Asia. 2 November 2020.</li>
+        <li>SLOCAT Webinar. IsDB Member Countries transport &amp; climate. 15 September 2020. <a href="https://www.youtube.com/watch?v=M_NGu9apuWs" target="_blank" rel="noopener">→ Watch</a></li>
+        <li>USAID Workshop. Long-Term Strategies and Transportation Planning in Asia. 7 September 2020.</li>
+        <li>GIZ Virtual Workshop. Green recovery for NDC implementation in transport in Asia. 1 July 2020.</li>
+        <li>TUMI TV. COVID-19 and urban mobility. 26 May 2020. <a href="https://youtu.be/LvT4rC2C3a4?t=3705" target="_blank" rel="noopener">→ Watch</a></li>
+        <li>APEC Workshop. Deep Transition and Integration of Power and Transport Systems, Cat Ba Island. 14–15 January 2020.</li>
+        <li>KIREC Seoul 2019. Renewable Energy in Zero-Emission Strategies for Urban Transport. 25 October 2019.</li>
+        <li>Asia-Pacific Climate Week 2019. Transport and Climate Change Action Hub. 5 September 2019.</li>
+        <li>IRENA Innovation Day. Decarbonising road transport. 4 September 2019.</li>
+        <li>UN-HABITAT Workshop. Mobilising Sustainable Urban Transport for Global Climate Action. April 2019.</li>
+        <li>Royal Asiatic Society (with Andy Tebay). From the First Tram to Korea's Modern Day Transport System. 22 November 2016.</li>
+        <li>Walk21 Hong Kong (with Namchul Baik). Pedestrian Safety and Walking Smart in Korea. 3–7 October 2016.</li>
+        <li>Annual Meeting of Korean Geographers. Sustainable Transportation Indicator Assessment. 7 November 2015.</li>
+        <li>Korean Society of Transportation 72nd Conference. Financial System of Walking and Cycling Infrastructure Design in Germany. 13 February 2015.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Get in Touch</h2>
+    <hr class="section-rule">
+    <p>Get in touch with me. Whether you have a question about sustainable transport, want to collaborate or just want to say hello, feel free to reach out.</p>
+    <div class="contact-links">
+      <a class="btn" href="https://www.linkedin.com/in/nikola-medimorec-b0b72030/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/nikolamedi" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://orcid.org/0000-0003-2935-7495" target="_blank" rel="noopener">ORCID</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-socials">
+    <a class="social-icon" href="https://www.linkedin.com/in/nikola-medimorec-b0b72030/" target="_blank" rel="noopener" title="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a class="social-icon" href="https://github.com/nikolamedi" target="_blank" rel="noopener" title="GitHub">
+      <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+    </a>
+    <a class="social-icon" href="https://orcid.org/0000-0003-2935-7495" target="_blank" rel="noopener" title="ORCID">
+      <svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.184H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.159-5.325 5.159h-3.919V7.416zm1.444 1.303v7.572h2.297c3.272 0 3.9-2.484 3.9-3.861 0-1.691-.819-3.711-3.934-3.711h-2.263z"/></svg>
+    </a>
+  </div>
+  <p>&copy; 2026 Nikola Medimorec &mdash; All rights reserved</p>
+</footer>
+
+<!-- Scroll to top -->
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+</button>
+
+<script>
+  // Navbar scroll shadow + active nav link
+  const navbar = document.getElementById('navbar');
+  const scrollTopBtn = document.getElementById('scroll-top');
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    navbar.classList.toggle('scrolled', y > 20);
+    scrollTopBtn.classList.toggle('visible', y > 400);
+
+    // Active nav
+    let current = '';
+    sections.forEach(s => {
+      if (y >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // Hamburger
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Close menu on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // Publication tabs
+  function showTab(id) {
+    document.querySelectorAll('.pub-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.pub-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
