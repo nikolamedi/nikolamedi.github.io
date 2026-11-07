@@ -5,9 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nikola Medimorec – Better transport for a better world</title>
   <meta name="description" content="Nikola Medimorec – Director of Data Analysis and Research at SLOCAT Partnership. Research and advocacy on sustainable transport, climate change and the Global South." />
+  <!-- Link previews (LinkedIn, Slack, email, etc.) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Nikola Medimorec – Better transport for a better world" />
+  <meta property="og:description" content="Research, data analysis and policy insights on sustainable, low-carbon transport and climate action." />
+  <meta property="og:url" content="https://nikola-medimorec.com/" />
+  <meta property="og:image" content="https://nikola-medimorec.com/images/nikola_medimorec.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="canonical" href="https://nikola-medimorec.com/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a1a1a'/%3E%3Ctext x='16' y='21.5' font-family='Arial,sans-serif' font-size='14' font-weight='700' fill='%23fff' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <style>
     /* ═══════════════════════════════════════
@@ -104,6 +113,8 @@
     /* hamburger */
     .hamburger {
       display: none;
+      background: none;
+      border: none;
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
@@ -139,7 +150,7 @@
     }
 
     /* ── HERO ── */
-    #design {
+    #home {
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -203,8 +214,6 @@
       color: var(--bg);
     }
     .btn:hover { background: #333; text-decoration: none; }
-    .btn-primary { background: var(--text); color: var(--bg); }
-    .btn-primary:hover { background: #333; }
 
     .design-socials {
       display: flex;
@@ -289,7 +298,8 @@
     }
     .flag-panel {
         display: inline-block;          /* shrink-wraps to the flags; use block for full width */
-        background: #f7f7f5;
+        margin-top: 2rem;
+        background: var(--bg-alt);
         padding: 1rem 1.25rem;
         border-radius: 12px;
       }
@@ -304,7 +314,7 @@
         font-size: 2rem;                /* controls flag size */
       }
     /* ── EXPERIENCE ── */
-    #experience { background: var(--bg-alt); }
+    #experience { background: var(--bg); }
 
     .timeline {
       display: flex;
@@ -363,6 +373,12 @@
     }
     .dl-link:hover { text-decoration: underline; }
 
+    /* keyboard focus */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--link);
+      outline-offset: 2px;
+    }
+
     /* ── PUBLICATIONS ── */
     #publications { background: var(--bg-alt); }
 
@@ -411,59 +427,115 @@
     .pub-list li + li { border-top: 1px solid var(--rule); }
     .pub-list li a { color: var(--link); font-weight: 600; }
     .pub-list li em { font-style: italic; color: var(--subtle); }
+    .pub-list .me { color: var(--text); font-weight: 700; }
 
-    /* ── SUSTAINABLE TRANSPORT ── */
-    #transport { background: var(--bg); }
+    /* long lists: show the first 10, reveal the rest on request */
+    .pub-list.collapsed li:nth-child(n+11) { display: none; }
+    .show-more {
+      margin: 1rem 0 0 0.75rem;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--link);
+    }
+    .show-more:hover { text-decoration: underline; }
 
-    .transport-list {
+    /* ── FEATURED WORK ── */
+    #work { background: var(--bg-alt); }
+
+    .section-intro {
+      color: var(--muted);
+      font-size: 0.94rem;
+      max-width: 620px;
+      margin: -1rem 0 2rem;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .work-card {
       display: flex;
       flex-direction: column;
-    }
-
-    .transport-link {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.25rem;
-      padding: 1.1rem 0.75rem;
+      padding: 1.5rem;
+      border: 1px solid var(--rule);
       border-radius: var(--radius);
-      text-decoration: none;
-      color: var(--text);
-      transition: background var(--transition);
+      background: var(--bg);
+      transition: border-color var(--transition), background var(--transition);
     }
-    .transport-link:hover { background: var(--hover-bg); text-decoration: none; }
-    .transport-link + .transport-link { border-top: 1px solid var(--rule); }
+    .work-card:hover { border-color: var(--subtle); }
 
-    .transport-link-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
-
-    .transport-link h3 {
-      font-family: var(--display);
-      font-size: 0.95rem;
+    .work-kicker {
+      font-size: 0.7rem;
       font-weight: 700;
-      margin-bottom: 0.2rem;
-      color: var(--text);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 0.4rem;
     }
 
-    .transport-link p {
-      font-size: 0.85rem;
+    .work-card h3 {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+
+    .work-card p {
+      font-size: 0.875rem;
       color: var(--muted);
-      line-height: 1.55;
+      line-height: 1.65;
+    }
+
+    .work-role {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--rule);
+    }
+    .work-role strong { color: var(--text); font-weight: 700; }
+
+    .work-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.1rem;
+      margin-top: auto;
+      padding-top: 1rem;
+    }
+    .work-links a {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     /* ── CONTACT ── */
-    #contact { background: var(--bg-alt); }
+    #contact { background: var(--bg); }
+
+    /* text on the left, button on the right, centred on the same line */
+    .contact-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
 
     #contact p {
       color: var(--muted);
       max-width: 480px;
-      margin-bottom: 1.5rem;
       font-size: 0.94rem;
     }
 
-    .contact-links {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
+    .contact-links { flex-shrink: 0; }
 
     /* ── FOOTER ── */
     footer {
@@ -527,8 +599,12 @@
       .about-grid { grid-template-columns: 1fr; }
       .about-photo { max-width: 180px; margin: 0 auto; }
 
-      .timeline-item, .edu-item { grid-template-columns: 1fr; gap: 0.25rem; }
-      .timeline-date, .edu-date { font-size: 0.72rem; }
+      .timeline-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .timeline-date { font-size: 0.72rem; }
+
+      .work-grid { grid-template-columns: 1fr; }
+      .contact-row { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .pub-tab { font-size: 0.72rem; padding: 0.3rem 0.7rem; }
     }
   </style>
 </head>
@@ -537,33 +613,33 @@
 <!-- ═══════════ NAVBAR ═══════════ -->
 <nav id="navbar">
   <div class="nav-inner">
-    <span class="nav-brand">Nikola Medimorec</span>
+    <a class="nav-brand" href="#home">Nikola Medimorec</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
+      <li><a href="#work">Featured Work</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </div>
 </nav>
 
-<!-- ═══════════ design ═══════════ -->
-<section id="design">
+<!-- ═══════════ HERO ═══════════ -->
+<section id="home">
   <div class="design-grid">
     <div class="design-text">
       <h1 class="design-name">Nikola <span>Medimorec</span></h1>
       <p class="design-title">Better transport for a better world</p>
       <p class="design-desc">
-        I help governments, international organisations and development partners understand and accelerate 
-        the implementation of sustainable, low-carbon transport 
-        through research, data analysis and policy insights.
-        My work supports global and regional efforts to create sustainable, low-carbon mobility systems and evidence-based decision making.
+        I help governments, international organisations and development partners understand and accelerate
+        the implementation of sustainable, low-carbon transport through research, data analysis and policy insights,
+        supporting evidence-based decision making at global and regional level.
       </p>
       <div class="design-buttons">
-        <a class="btn" href="#about">About Me</a>
+        <a class="btn" href="#work">Featured Work</a>
         <a class="btn" href="#contact">Get in Touch</a>
       </div>
       <div class="design-socials">
@@ -584,8 +660,9 @@
     <div class="design-photo-wrap">
       <img
         class="design-photo"
-        src="images/nikola_medimorec.jpg?fit=600%2C600&ssl=1"
-        alt="Nikola Medimorec"
+        src="images/nikola_medimorec.jpg"
+        alt="Portrait of Nikola Medimorec"
+        width="200" height="200"
       />
     </div>
   </div>
@@ -600,8 +677,9 @@
       <div>
         <img
           class="about-photo"
-          src="images/nikola_yeosu.jpg?fit=600%2C600&ssl=1"
-          alt="Nikola Medimorec"
+          src="images/nikola_yeosu.jpg"
+          alt="Nikola Medimorec in Yeosu"
+          loading="lazy"
         />
       </div>
       <div class="about-text">
@@ -621,7 +699,6 @@
       </div>
     </div>
       <div>
-	    <p></p>
         <p class="label">Education</p>
         <div class="lang-chips">
           <span class="lang-chip">Master of Arts - Seoul National University</span>
@@ -634,7 +711,6 @@
           <span class="lang-chip">Data and research</span>
           <span class="lang-chip">Freight Transport</span>
         </div>
-	    <p></p>
         <p class="label">Languages</p>
         <div class="lang-chips">
           <span class="lang-chip">Croatian - Native</span>
@@ -644,32 +720,82 @@
           <span class="lang-chip">French - Beginner</span>
         </div>
       </div>
-      <div>
-      <br> 
-      </div>
-	    <p></p>
       <div class="flag-panel">
         <p>
-          Through my work, I have been engaging with policymakers, practitioners and stakeholders on the topics of sustainable transport, climate change and development in over 40 countries. In person, I traveled to more than a dozen countries in Asia, Africa, Europe and the Americas to support research, advocacy and capacity building. The countries I traveled to were:
+          Through my work, I have engaged with policymakers, practitioners and stakeholders on sustainable transport, climate change and development in over 40 countries. In person, I have travelled to more than a dozen countries in Asia, Africa, Europe and the Americas to support research, advocacy and capacity building:
         </p>
-        <p>
-          <ul class="flag-row">
-            <li><span class="fi fi-cn" role="img" aria-label="China"></span></li>
-            <li><span class="fi fi-ph" role="img" aria-label="Philippines"></span></li>
-            <li><span class="fi fi-th" role="img" aria-label="Thailand"></span></li>
-            <li><span class="fi fi-de" role="img" aria-label="Germany"></span></li>
-            <li><span class="fi fi-pl" role="img" aria-label="Poland"></span></li>
-            <li><span class="fi fi-us" role="img" aria-label="USA"></span></li>
-            <li><span class="fi fi-be" role="img" aria-label="Belgium"></span></li>
-            <li><span class="fi fi-es" role="img" aria-label="Spain"></span></li>
-            <li><span class="fi fi-cr" role="img" aria-label="Costa Rica"></span></li>
-            <li><span class="fi fi-ae" role="img" aria-label="UAE"></span></li>
-            <li><span class="fi fi-ng" role="img" aria-label="Nigeria"></span></li>
-            <li><span class="fi fi-ke" role="img" aria-label="Kenya"></span></li>
-            <li><span class="fi fi-tr" role="img" aria-label="Türkiye"></span></li>
-          </ul>
-        </p>
+        <ul class="flag-row">
+            <li><span class="fi fi-cn" role="img" aria-label="China" title="China"></span></li>
+            <li><span class="fi fi-ph" role="img" aria-label="Philippines" title="Philippines"></span></li>
+            <li><span class="fi fi-th" role="img" aria-label="Thailand" title="Thailand"></span></li>
+            <li><span class="fi fi-de" role="img" aria-label="Germany" title="Germany"></span></li>
+            <li><span class="fi fi-pl" role="img" aria-label="Poland" title="Poland"></span></li>
+            <li><span class="fi fi-us" role="img" aria-label="USA" title="USA"></span></li>
+            <li><span class="fi fi-be" role="img" aria-label="Belgium" title="Belgium"></span></li>
+            <li><span class="fi fi-es" role="img" aria-label="Spain" title="Spain"></span></li>
+            <li><span class="fi fi-cr" role="img" aria-label="Costa Rica" title="Costa Rica"></span></li>
+            <li><span class="fi fi-ae" role="img" aria-label="UAE" title="UAE"></span></li>
+            <li><span class="fi fi-ng" role="img" aria-label="Nigeria" title="Nigeria"></span></li>
+            <li><span class="fi fi-ke" role="img" aria-label="Kenya" title="Kenya"></span></li>
+            <li><span class="fi fi-tr" role="img" aria-label="Türkiye" title="Türkiye"></span></li>
+        </ul>
       </div>
+  </div>
+</section>
+
+<!-- ═══════════ FEATURED WORK ═══════════ -->
+<section id="work">
+  <div class="container">
+    <h2 class="section-title">Featured Work</h2>
+    <hr class="section-rule">
+    <p class="section-intro">A selection of long-running research products I have helped build, from global status reporting to tracking climate commitments.</p>
+    <div class="work-grid">
+
+      <article class="work-card">
+        <p class="work-kicker">Flagship report · 2018–2025</p>
+        <h3>Transport, Climate and Sustainability Global Status Report (GSR)</h3>
+        <p>SLOCAT's flagship report on trends in transport demand, emissions, policies and finance across all modes and regions. Four editions published, the latest in 2025.</p>
+        <p class="work-role"><strong>My role:</strong> led all figures, key indicators and data for the first edition; since then, I have conducted and overseen the research and data analysis.</p>
+        <div class="work-links">
+          <a href="https://gsr4.slocat.net/" target="_blank" rel="noopener">4th edition →</a>
+          <a href="https://tcc-gsr.com/" target="_blank" rel="noopener">Earlier editions →</a>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <p class="work-kicker">Database · with GIZ</p>
+        <h3>NDC Transport Tracker</h3>
+        <p>An open database tracking transport targets, measures and policies in Nationally Determined Contributions (NDCs) and long-term strategies, used to assess whether climate commitments put transport on track for 1.5°C.</p>
+        <p class="work-role"><strong>My role:</strong> [to confirm, e.g. co-developed the methodology and lead SLOCAT's analysis of transport in NDCs.]</p>
+        <div class="work-links">
+          <a href="https://changing-transport.org/tracker/" target="_blank" rel="noopener">Explore the tracker →</a>
+          <a href="https://slocat.net/wp-content/uploads/2026/10/Transport-in-NDC-3.0_update_september-2026.pdf" target="_blank" rel="noopener">Latest NDC insights →</a>
+          <a href="https://slocat-partnership.github.io/ndc-transport-regions/" target="_blank" rel="noopener">Regional dashboards →</a>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <p class="work-kicker">Index · 2024–2025</p>
+        <h3>Transport Decarbonisation Index (TDI)</h3>
+        <p>An indicator-based tool to benchmark progress towards sustainable, low-carbon surface transport in low- and middle-income countries in South Asia and Sub-Saharan Africa.</p>
+        <p class="work-role"><strong>My role:</strong> [to confirm, e.g. co-author of the methodology, benchmarking report and peer-reviewed article.]</p>
+        <div class="work-links">
+          <a href="https://transport-links.com/hvt-publications/transport-decarbonisation-index-tdi-benchmarking-report/" target="_blank" rel="noopener">Benchmarking report →</a>
+          <a href="https://doi.org/10.3390/su17041657" target="_blank" rel="noopener">Journal article →</a>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <p class="work-kicker">Research area · freight</p>
+        <h3>Freight Transport and Logistics</h3>
+        <p>Research on how climate commitments address freight, including a roadmap for transformative action and an assessment of China, India and Viet Nam.</p>
+        <p class="work-role"><strong>My role:</strong> [to confirm, e.g. lead author of the NDC freight analyses.]</p>
+        <div class="work-links">
+          <a href="https://slocat.net/roadmap-for-transformative-action/" target="_blank" rel="noopener">Roadmap →</a>
+          <a href="https://slocat-partnership.github.io/ndc-tia-freight-overview/" target="_blank" rel="noopener">Asia assessment →</a>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -720,7 +846,7 @@
       <div class="timeline-item">
         <div class="timeline-date">2015 and before</div>
         <div class="timeline-body">
-          <h3>Various Consultancies, internships and teaching assistant</h3>
+          <h3>Consultancies, internships and teaching assistance</h3>
           <h4>The Korea Transport Institute (KOTI), CITYNET Asia-Pacific, University of Trier</h4>
         </div>
       </div>
@@ -736,75 +862,75 @@
     <hr class="section-rule">
 
     <div class="pub-tabs">
-      <button class="pub-tab active" onclick="showTab('major')">Major Publications</button>
-      <button class="pub-tab" onclick="showTab('scientific')">Scientific Articles</button>
-      <button class="pub-tab" onclick="showTab('presentations')">Presentations &amp; Public Speaking</button>
-      <button class="pub-tab" onclick="showTab('articles')">Other Articles</button>
-      <button class="pub-tab" onclick="showTab('media')">Interviews &amp; Media</button>
+      <button class="pub-tab active" onclick="showTab('major', this)">Major Publications</button>
+      <button class="pub-tab" onclick="showTab('scientific', this)">Scientific Articles</button>
+      <button class="pub-tab" onclick="showTab('presentations', this)">Presentations &amp; Public Speaking</button>
+      <button class="pub-tab" onclick="showTab('articles', this)">Other Articles</button>
+      <button class="pub-tab" onclick="showTab('media', this)">Interviews &amp; Media</button>
     </div>
 
     <!-- Major -->
     <div class="pub-panel active" id="tab-major">
       <ul class="pub-list">
-        <li>Nikola Medimorec and G. Ankunda (2026). How does climate ambition tackle freight transport and logistics? Assessment of China, India and Viet Nam in comparison to Asia. NDC Transport Initiative for Asia. <a href="https://slocat-partnership.github.io/ndc-tia-freight-overview/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec, Vincent J., Jamdade A., Gilbert-Patrick C., Danso E. and Ankunda G. (2026). The Case for a Unified Global Goal to Support the UN Decade of Sustainable Transport. Transport and Communications Bulletin for Asia and the Pacific No. 96 – UN Decade of Sustainable Transport. <a href="https://slocat.net/wp-content/uploads/2026/10/Transport-in-NDC-3.0_update_september-2026.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Hohmann T.S., Nikola Medimorec, Vásquez B. and Becker N. (2026). Is transport on track for 1.5°C? Insights from the new Nationally Determined Contributions (NDCs) - September Update. <a href="https://slocat.net/wp-content/uploads/2026/10/Transport-in-NDC-3.0_update_september-2026.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Ankunda G. and Nikola Medimorec drafted policy recommendations for Meuer J. and Petersen M. (2026). 2026 Global Sustainable Logistics Survey – Report. Center for Sustainable Logistics and Supply Chains at KLU Hamburg & Kuehne Climate Center. <a href="https://globalsustainablelogisticssurvey.org/report-2026" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Haq G., Onitekun O. and Nikola Medimorec (2026). Climate and clean air action framework. An emission reduction guide for transport businesses in Nigeria. <a href="https://slocat.net/wp-content/uploads/2026/08/Climate-and-clean-air-action-framework-final-1.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2026). Regional Insights on Transport in Third-Generation NDCs. Interactive online dashboards. <a href="https://slocat-partnership.github.io/ndc-transport-regions/" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> and G. Ankunda (2026). How does climate ambition tackle freight transport and logistics? Assessment of China, India and Viet Nam in comparison to Asia. NDC Transport Initiative for Asia. <a href="https://slocat-partnership.github.io/ndc-tia-freight-overview/" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span>, Vincent J., Jamdade A., Gilbert-Patrick C., Danso E. and Ankunda G. (2026). The Case for a Unified Global Goal to Support the UN Decade of Sustainable Transport. Transport and Communications Bulletin for Asia and the Pacific No. 96 – UN Decade of Sustainable Transport. <a href="https://slocat.net/wp-content/uploads/2026/10/Transport-in-NDC-3.0_update_september-2026.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Hohmann T.S., <span class="me">Nikola Medimorec</span>, Vásquez B. and Becker N. (2026). Is transport on track for 1.5°C? Insights from the new Nationally Determined Contributions (NDCs) - September Update. <a href="https://slocat.net/wp-content/uploads/2026/10/Transport-in-NDC-3.0_update_september-2026.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Ankunda G. and <span class="me">Nikola Medimorec</span> drafted policy recommendations for Meuer J. and Petersen M. (2026). 2026 Global Sustainable Logistics Survey – Report. Center for Sustainable Logistics and Supply Chains at KLU Hamburg & Kuehne Climate Center. <a href="https://globalsustainablelogisticssurvey.org/report-2026" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Haq G., Onitekun O. and <span class="me">Nikola Medimorec</span> (2026). Climate and clean air action framework. An emission reduction guide for transport businesses in Nigeria. <a href="https://slocat.net/wp-content/uploads/2026/08/Climate-and-clean-air-action-framework-final-1.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2026). Regional Insights on Transport in Third-Generation NDCs. Interactive online dashboards. <a href="https://slocat-partnership.github.io/ndc-transport-regions/" target="_blank" rel="noopener">→ Read</a></li>
         <li>Kuehne Climate Center &amp; SLOCAT (2026). Roadmap for Transformative Action on Freight Transport and Logistics. <a href="https://slocat.net/roadmap-for-transformative-action/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Hohmann T.S., Nikola Medimorec, Vásquez B. and Becker N. (2026). Is transport on track for 1.5°C? Insights from the new Nationally Determined Contributions (NDCs). <a href="https://slocat.net/wp-content/uploads/2026/02/Is-Transport-on-Track-for-1.5-degrees-NDC-insights-2026.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Hohmann T.S., <span class="me">Nikola Medimorec</span>, Vásquez B. and Becker N. (2026). Is transport on track for 1.5°C? Insights from the new Nationally Determined Contributions (NDCs). <a href="https://slocat.net/wp-content/uploads/2026/02/Is-Transport-on-Track-for-1.5-degrees-NDC-insights-2026.pdf" target="_blank" rel="noopener">→ Read</a></li>
         <li>SLOCAT (2025). Transport in COP30 Outcomes. <a href="https://slocat.net/wp-content/uploads/2025/12/Transport-in-COP30-outcomes.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2025). Transport in Third-generation NDCs – An Assessment as of 3 November 2025. <a href="https://slocat.net/wp-content/uploads/2025/11/Transport-in-Third-Generation-NDCs_SLOCAT-Assessment-as-of-3-Nov-2025.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2025). Transport in Third-generation NDCs – An Assessment as of 3 November 2025. <a href="https://slocat.net/wp-content/uploads/2025/11/Transport-in-Third-Generation-NDCs_SLOCAT-Assessment-as-of-3-Nov-2025.pdf" target="_blank" rel="noopener">→ Read</a></li>
         <li>SLOCAT (2025). SLOCAT Transport, Climate and Sustainability Global Status Report, 4th Edition. <a href="https://gsr4.slocat.net/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Bassi A. M., Kapetanakis M., Ankunda G., Berthet B., Cardama M. and Nikola Medimorec (2025). Evolving the Economic Appraisals for Land Transport Investments. SLOCAT, TUMI and IISD. <a href="https://slocat.net/wp-content/uploads/2024/11/Evolving-Economic-Appraisals-for-Land-Transport-Investments_Policy-Paper.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2025). Five-Point Plan for Transport in New NDCs: Raising Ambition for Transport in Nationally Determined Contributions. <a href="https://slocat.net/wp-content/uploads/2025/03/Five-Point-Plan-for-Transport-in-New-NDCs_2025-Recommendations-2.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Bassi A. M., Kapetanakis M., Ankunda G., Berthet B., Cardama M. and <span class="me">Nikola Medimorec</span> (2025). Evolving the Economic Appraisals for Land Transport Investments. SLOCAT, TUMI and IISD. <a href="https://slocat.net/wp-content/uploads/2024/11/Evolving-Economic-Appraisals-for-Land-Transport-Investments_Policy-Paper.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2025). Five-Point Plan for Transport in New NDCs: Raising Ambition for Transport in Nationally Determined Contributions. <a href="https://slocat.net/wp-content/uploads/2025/03/Five-Point-Plan-for-Transport-in-New-NDCs_2025-Recommendations-2.pdf" target="_blank" rel="noopener">→ Read</a></li>
         <li>SLOCAT (2025). Transport Decarbonisation Index – Spreadsheet toolkit. <a href="https://transport-links.com/hvt-publications/transport-decarbonisation-index-tdi-spreadsheet-toolkit/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Serafimova T. and Nikola Medimorec (2025). Transport in COP29 Outcomes. <a href="https://slocat.net/wp-content/uploads/2024/12/Transport-in-COP29-outcomes.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Fulton L., Cazzola P., Teter J., Nikola Medimorec, Serafimova T., Ankunda G., Berthet B., Lah O., Andrieu V.-M. and Mejia A. (2024). Transport Decarbonisation Index (TDI) Benchmarking Report. <a href="https://transport-links.com/hvt-publications/transport-decarbonisation-index-tdi-benchmarking-report/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec, Yiu A., Ankunda G., Serafimova T., Berthet B. and Zhang, Y. (2024). A Policy Guide to Improving Access to Climate Finance for Transport. <a href="https://transport-links.com/hvt-publications/a-policy-guide-to-improving-access-to-climate-finance-for-transport/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec, Cardama M. and Berthet B. (2024). State of Play of Transport Targets in Nationally Determined Contributions and Beyond in Asia and the Pacific. UNESCAP. <a href="https://repository.unescap.org/items/dc13b9a4-25e3-4e96-ab92-0cd201153c16" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec, Cardama M., Ankunda G. and Berthet B. (2024). Policies and investments for intermodal, low-carbon, efficient and resilient freight transport and logistics. <a href="https://slocat.net/policies-and-investments-for-intermodal-low-carbon-efficient-and-resilient-freight-transport-and-logistics/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec and Cardama M. (2024). A call to double the share of energy efficient and fossil-free forms of land transport by 2030. <a href="https://slocat.net/wp-content/uploads/2024/09/Call2Action-NDC-Research-The-Commitment.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Fulton L., Cazzola P., Teter J., Nikola Medimorec, Ankunda G., Berthet B., Lah O., Andrieu V.-M. and Mejia A. (2024). Transport Decarbonisation Index Methodology Report. <a href="https://transport-links.com/hvt-publications/transport-decarbonisation-index-methodology-report/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Serafimova T. and <span class="me">Nikola Medimorec</span> (2025). Transport in COP29 Outcomes. <a href="https://slocat.net/wp-content/uploads/2024/12/Transport-in-COP29-outcomes.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Fulton L., Cazzola P., Teter J., <span class="me">Nikola Medimorec</span>, Serafimova T., Ankunda G., Berthet B., Lah O., Andrieu V.-M. and Mejia A. (2024). Transport Decarbonisation Index (TDI) Benchmarking Report. <a href="https://transport-links.com/hvt-publications/transport-decarbonisation-index-tdi-benchmarking-report/" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span>, Yiu A., Ankunda G., Serafimova T., Berthet B. and Zhang, Y. (2024). A Policy Guide to Improving Access to Climate Finance for Transport. <a href="https://transport-links.com/hvt-publications/a-policy-guide-to-improving-access-to-climate-finance-for-transport/" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span>, Cardama M. and Berthet B. (2024). State of Play of Transport Targets in Nationally Determined Contributions and Beyond in Asia and the Pacific. UNESCAP. <a href="https://repository.unescap.org/items/dc13b9a4-25e3-4e96-ab92-0cd201153c16" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span>, Cardama M., Ankunda G. and Berthet B. (2024). Policies and investments for intermodal, low-carbon, efficient and resilient freight transport and logistics. <a href="https://slocat.net/policies-and-investments-for-intermodal-low-carbon-efficient-and-resilient-freight-transport-and-logistics/" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> and Cardama M. (2024). A call to double the share of energy efficient and fossil-free forms of land transport by 2030. <a href="https://slocat.net/wp-content/uploads/2024/09/Call2Action-NDC-Research-The-Commitment.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Fulton L., Cazzola P., Teter J., <span class="me">Nikola Medimorec</span>, Ankunda G., Berthet B., Lah O., Andrieu V.-M. and Mejia A. (2024). Transport Decarbonisation Index Methodology Report. <a href="https://transport-links.com/hvt-publications/transport-decarbonisation-index-methodology-report/" target="_blank" rel="noopener">→ Read</a></li>
         <li>ITF and SLOCAT (2024). Prioritising just transition for transport in Nationally Determined Contributions. <a href="https://slocat.net/wp-content/uploads/2024/06/Just-transition-for-transport-in-NDCs_infographic_final-24-May.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Mejia A., Andrieu V.-M., Lah O., Nikola Medimorec and Ankunda G. (2024). Towards the Development of a Surface Transport Decarbonisation Index for Low- and Middle-Income Countries in South Asia and Sub-Saharan Africa: State of Knowledge Report. <a href="https://transport-links.com/hvt-publications/towards-the-development-of-a-surface-transport-decarbonisation-index-for-low-and-middle-income-countries-in-south-asia-and-sub-saharan-africa-state-of-knowledge-report/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Mejia A., Andrieu V.-M., Lah O., <span class="me">Nikola Medimorec</span> and Ankunda G. (2024). Towards the Development of a Surface Transport Decarbonisation Index for Low- and Middle-Income Countries in South Asia and Sub-Saharan Africa: State of Knowledge Report. <a href="https://transport-links.com/hvt-publications/towards-the-development-of-a-surface-transport-decarbonisation-index-for-low-and-middle-income-countries-in-south-asia-and-sub-saharan-africa-state-of-knowledge-report/" target="_blank" rel="noopener">→ Read</a></li>
         <li>SLOCAT (2024). Transport in COP28 Outcomes. <a href="https://slocat.net/wp-content/uploads/2024/02/Transport-in-COP28-outcomes.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2023). In-depth Report on Inland Transport and Climate Change, Part 1: Getting towards net zero – Status, Projections and GHG Emissions Trends. Background report for UNECE ITC, ECE/TRANS/2024/4. <a href="https://unece.org/sites/default/files/2023-12/ECE_TRANS_2024_04e_0.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2023). In-depth Report on Inland Transport and Climate Change, Part 2: Decarbonization Policy Commitments, Challenges and Opportunities. Background report for UNECE ITC, ECE/TRANS/2024/5. <a href="https://unece.org/sites/default/files/2023-12/ECE_TRANS_2024_5e_01.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Dalkmann H., Shah S., Vieweg M. and Nikola Medimorec (2023). Achieving the Aichi 2030 Declaration Goal 1A Climate Change Mitigation: Policy Action Recommendations. <a href="https://uncrd.un.org/sites/default/files/15th-est_pr_goal1a-climate-change.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2023). In-depth Report on Inland Transport and Climate Change, Part 1: Getting towards net zero – Status, Projections and GHG Emissions Trends. Background report for UNECE ITC, ECE/TRANS/2024/4. <a href="https://unece.org/sites/default/files/2023-12/ECE_TRANS_2024_04e_0.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2023). In-depth Report on Inland Transport and Climate Change, Part 2: Decarbonization Policy Commitments, Challenges and Opportunities. Background report for UNECE ITC, ECE/TRANS/2024/5. <a href="https://unece.org/sites/default/files/2023-12/ECE_TRANS_2024_5e_01.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Dalkmann H., Shah S., Vieweg M. and <span class="me">Nikola Medimorec</span> (2023). Achieving the Aichi 2030 Declaration Goal 1A Climate Change Mitigation: Policy Action Recommendations. <a href="https://uncrd.un.org/sites/default/files/15th-est_pr_goal1a-climate-change.pdf" target="_blank" rel="noopener">→ Read</a></li>
         <li>SLOCAT (2023). SLOCAT Transport, Climate and Sustainability Global Status Report, 3rd Edition. <a href="https://tcc-gsr.com/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Murdock H.E., Cardama M., Nikola Medimorec, Yiu A. and Dalkmann H. (2023). From Turbulence to Transformation: Navigating Challenges Towards Action on Transport, Climate and Sustainability. <a href="https://tcc-gsr.com/wp-content/uploads/2023/09/From-Turbulence-to-Transformation-Navigating-Challenges-Towards-Action-on-Transport-Climate-and-Sustainability.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Murdock H.E., Cardama M., <span class="me">Nikola Medimorec</span>, Yiu A. and Dalkmann H. (2023). From Turbulence to Transformation: Navigating Challenges Towards Action on Transport, Climate and Sustainability. <a href="https://tcc-gsr.com/wp-content/uploads/2023/09/From-Turbulence-to-Transformation-Navigating-Challenges-Towards-Action-on-Transport-Climate-and-Sustainability.pdf" target="_blank" rel="noopener">→ Read</a></li>
         <li>SLOCAT (2023). Towards a Future-Aligned ‘Gold Standard’ for Transport Investment. <a href="https://slocat.net/towards-a-future-aligned-gold-standard-for-transport-investment/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec and Cardama M. (2022). Climate Strategies for Transport: An Analysis of NDCs and Long-Term Strategies, October 2022 Update. SLOCAT. <a href="https://slocat.net/ndcs/" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> and Cardama M. (2022). Climate Strategies for Transport: An Analysis of NDCs and Long-Term Strategies, October 2022 Update. SLOCAT. <a href="https://slocat.net/ndcs/" target="_blank" rel="noopener">→ Read</a></li>
         <li>IsDB &amp; SLOCAT (2022). Sustainable Low Carbon Transport in COVID-19 Pandemic Recovery Strategies: A Joint Analysis by IsDB and SLOCAT for Member Countries. <a href="https://slocat.net/wp-content/uploads/2022/08/COVID-19-infographic_2022.08.30.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2022). E-Mobility Trends and Targets. <a href="https://slocat.net/e-mobility-targets/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec, Cardama M. et al. (2021). Climate Strategies for Transport: An Analysis of NDCs and Long-Term Strategies. <a href="https://slocat.net/climate-strategies-for-transport/" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2022). E-Mobility Trends and Targets. <a href="https://slocat.net/e-mobility-targets/" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span>, Cardama M. et al. (2021). Climate Strategies for Transport: An Analysis of NDCs and Long-Term Strategies. <a href="https://slocat.net/climate-strategies-for-transport/" target="_blank" rel="noopener">→ Read</a></li>
         <li>SLOCAT (2021). Tracking Trends in a Time of Change: Transport and Climate Change Global Status Report – 2nd edition. <a href="https://tcc-gsr.com/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Enriquez A., Gota S., Huizenga C. and Nikola Medimorec (2020). Asian Transport Outlook. <a href="https://slocat.net/ATO/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Enriquez A., Gota S., Huizenga C. and <span class="me">Nikola Medimorec</span> (2020). Asian Transport Outlook. <a href="https://slocat.net/ATO/" target="_blank" rel="noopener">→ Read</a></li>
         <li>Ochs A. et al. (2020). Roadmap for the Integration of Sustainable Energy and Transport in Small Islands. APEC. <a href="https://www.apec.org/Publications/2020/11/Roadmap-for-the-Integration-of-Sustainable-Energy-and-Transport-in-Small-Islands" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Ibold S., Nikola Medimorec, Wagner A. and Peruzzo J. (2020). COVID-19 and Sustainable Mobility. Observations and documentation of first developments. <a href="https://www.transformative-mobility.org/wp-content/uploads/2023/03/2020_05_TUMI_COVID-19-and-Sustainable-Mobility-sMtB7P.pdf" target="_blank" rel="noopener">→ Read</a></li>
-	    	<li>Nikola Medimorec et al. (2020). Impacts of COVID-19 on Mobility: Preliminary analysis of regional trends on urban mobility. SLOCAT. <a href="https://slocat.net/covid-19-impact-mobility/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Peet K., Gota S., Nikola Medimorec and Cardama M. (2020). Transport, Climate Action and Sustainable Development: Synergies across NDCs and VNRs in IsDB Member Countries. <a href="https://slocat.net/isdb-slocat-sustainable-transport/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Ibold S., <span class="me">Nikola Medimorec</span>, Wagner A. and Peruzzo J. (2020). COVID-19 and Sustainable Mobility. Observations and documentation of first developments. <a href="https://www.transformative-mobility.org/wp-content/uploads/2023/03/2020_05_TUMI_COVID-19-and-Sustainable-Mobility-sMtB7P.pdf" target="_blank" rel="noopener">→ Read</a></li>
+	    	<li><span class="me">Nikola Medimorec</span> et al. (2020). Impacts of COVID-19 on Mobility: Preliminary analysis of regional trends on urban mobility. SLOCAT. <a href="https://slocat.net/covid-19-impact-mobility/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Peet K., Gota S., <span class="me">Nikola Medimorec</span> and Cardama M. (2020). Transport, Climate Action and Sustainable Development: Synergies across NDCs and VNRs in IsDB Member Countries. <a href="https://slocat.net/isdb-slocat-sustainable-transport/" target="_blank" rel="noopener">→ Read</a></li>
         <li>SLOCAT (2018). Transport and Climate Change 2018 – Global Status Report. <a href="http://slocat.net/tcc-gsr" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Yiu A., Peet K., Nikola Medimorec and Dalkmann H. (2018). 2018 Voluntary National Reviews: Showcasing the Critical Role of the Transport Sector to Achieve the SDGs. <a href="http://www.slocat.net/vnr2018" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Peet K. and Nikola Medimorec (2017). Progress Report (2016-2018) of the MDB Working Group on Sustainable Transport. Produced for the MDB Working Group on Sustainable Transport. <a href="https://www.adb.org/documents/progress-report-2016-2018-mdb-wg-sustainable-transport" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Peet K., Huizenga C., Gota S. and Nikola Medimorec (2017). A Global Macro Roadmap Outlining an Actionable Vision Towards Decarbonized, Resilient Transport. Paris Process on Mobility and Climate. <a href="https://slocat.net/wp-content/uploads/2022/04/GMR2017.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Yiu A., Peet K., <span class="me">Nikola Medimorec</span> and Dalkmann H. (2018). 2018 Voluntary National Reviews: Showcasing the Critical Role of the Transport Sector to Achieve the SDGs. <a href="http://www.slocat.net/vnr2018" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Peet K. and <span class="me">Nikola Medimorec</span> (2017). Progress Report (2016-2018) of the MDB Working Group on Sustainable Transport. Produced for the MDB Working Group on Sustainable Transport. <a href="https://www.adb.org/documents/progress-report-2016-2018-mdb-wg-sustainable-transport" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Peet K., Huizenga C., Gota S. and <span class="me">Nikola Medimorec</span> (2017). A Global Macro Roadmap Outlining an Actionable Vision Towards Decarbonized, Resilient Transport. Paris Process on Mobility and Climate. <a href="https://slocat.net/wp-content/uploads/2022/04/GMR2017.pdf" target="_blank" rel="noopener">→ Read</a></li>
       </ul>
     </div>
 
     <!-- Scientific -->
     <div class="pub-panel" id="tab-scientific">
       <ul class="pub-list">
-        <li>Fulton, L.M., Nikola Medimorec, Serafimova, T., Ankunda, G., Cazzola, P., Teter, J., Andrieu, V.-M., Lah, O. and Mejia, A. (2025). Benchmarking Sustainable, Low-Carbon Transport in Low- and Middle-Income Countries Through a Novel Indicator Assessment. <em>Sustainability</em> 2025, 17, 1657. <a href="https://doi.org/10.3390/su17041657" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Fulton, L.M., <span class="me">Nikola Medimorec</span>, Serafimova, T., Ankunda, G., Cazzola, P., Teter, J., Andrieu, V.-M., Lah, O. and Mejia, A. (2025). Benchmarking Sustainable, Low-Carbon Transport in Low- and Middle-Income Countries Through a Novel Indicator Assessment. <em>Sustainability</em> 2025, 17, 1657. <a href="https://doi.org/10.3390/su17041657" target="_blank" rel="noopener">→ Read</a></li>
  		    <li>Dixon, J. et al. (2026). The Transport Data Commons: operationalising FAIR data for global sustainable mobility transitions. Zenodo. <a href="https://doi.org/10.5281/zenodo.18965206" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Serafimova T., Nikola Medimorec and Ankunda G. (2025). Climate Finance and Economic Mechanisms: Two Essential Yet Mismatched Pieces of the Sustainable Transport. Green Mobility Magazine IV. <a href="https://ibexpub.media/climate-finance-and-economic-mechanisms-two-essential-yet-mismatched-pieces-of-the-sustainable-transport-puzzle/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Tan, N., Ambunda, R., Nikola Medimorec, Cortez, A., Krapp, A., Maxwell, E., Harrison, J., and Howells, M. (2024) Transport starter data kit: Historical passenger and freight transport data for selected countries in Africa, Asia, and South America, <em>Data in Brief</em>, Volume 57. <a href="https://doi.org/10.1016/j.dib.2024.110984" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Serafimova T., <span class="me">Nikola Medimorec</span> and Ankunda G. (2025). Climate Finance and Economic Mechanisms: Two Essential Yet Mismatched Pieces of the Sustainable Transport. Green Mobility Magazine IV. <a href="https://ibexpub.media/climate-finance-and-economic-mechanisms-two-essential-yet-mismatched-pieces-of-the-sustainable-transport-puzzle/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Tan, N., Ambunda, R., <span class="me">Nikola Medimorec</span>, Cortez, A., Krapp, A., Maxwell, E., Harrison, J., and Howells, M. (2024) Transport starter data kit: Historical passenger and freight transport data for selected countries in Africa, Asia, and South America, <em>Data in Brief</em>, Volume 57. <a href="https://doi.org/10.1016/j.dib.2024.110984" target="_blank" rel="noopener">→ Read</a></li>
         <li>Bakker S. et al. (2019). Low-Carbon Quick Wins: Integrating Short-Term Sustainable Transport Options in Climate Policy in Low-Income Countries. <em>Sustainability</em> 11(16), 4369. <a href="https://www.mdpi.com/2071-1050/11/16/4369" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Gota S., Huizenga C., Peet K., Nikola Medimorec and Bakker S. (2019). Decarbonising transport to achieve Paris Agreement targets. <em>Energy Efficiency</em> 12, 363. <a href="https://link.springer.com/article/10.1007/s12053-018-9671-3" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2018). Bicycles, the Origin of Sustainable Mobility. Chapter 6 in: Korean Society of Transportation, <em>Connection of Time and Space, Transportation Story</em> (in Korean).</li>
-        <li>Kang J. S. and Nikola Medimorec (2016). Green Transport Assessment Methodology: A Two-Stage Framework for Indicator-Based Assessment and Policy Mapping. Fourth Green Growth Knowledge Platform Annual Conference. <a href="https://www.greengrowthknowledge.org/sites/default/files/D4_Kang_Green_transport_assessment_methodology.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec, Ross G. and Weber I. M. (2014). Kim Ae-ran: Die Achse eines Tages. <em>Hefte für ostasiatische Literatur</em> 56.</li>
+        <li>Gota S., Huizenga C., Peet K., <span class="me">Nikola Medimorec</span> and Bakker S. (2019). Decarbonising transport to achieve Paris Agreement targets. <em>Energy Efficiency</em> 12, 363. <a href="https://link.springer.com/article/10.1007/s12053-018-9671-3" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2018). Bicycles, the Origin of Sustainable Mobility. Chapter 6 in: Korean Society of Transportation, <em>Connection of Time and Space, Transportation Story</em> (in Korean).</li>
+        <li>Kang J. S. and <span class="me">Nikola Medimorec</span> (2016). Green Transport Assessment Methodology: A Two-Stage Framework for Indicator-Based Assessment and Policy Mapping. Fourth Green Growth Knowledge Platform Annual Conference. <a href="https://www.greengrowthknowledge.org/sites/default/files/D4_Kang_Green_transport_assessment_methodology.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span>, Ross G. and Weber I. M. (2014). Kim Ae-ran: Die Achse eines Tages. <em>Hefte für ostasiatische Literatur</em> 56.</li>
       </ul>
     </div>
 
@@ -858,21 +984,21 @@
     <!-- Articles -->
     <div class="pub-panel" id="tab-articles">
       <ul class="pub-list">
-        <li>Ankunda G., Vincent J. and Nikola Medimorec (2026). Freight Transport in Asia: Moving goods, leaving women behind. GSR Explained. <a href="https://gsr4.slocat.net/freight-transport-in-asia-moving-goods-leaving-women-behind/" target="_blank" rel="noopener">→ Read</a></li>
-	    	<li>Nikola Medimorec, Vincent J., Gilbert-Patrick C. and Jamdade A. (2026). Transport in NDCs: Doubling in ambition, finance &amp; implementation must follow. GSR Explained. <a href="https://gsr4.slocat.net/transport-in-ndcs-doubling-in-ambition-finance-implementation-must-follow/" target="_blank" rel="noopener">→ Read</a></li>
-	    	<li>Vincent J. and Nikola Medimorec (2026). Overshoot Is Here. Transport Decides How High and How Long. <a href="https://slocat.net/overshoot-is-here-transport-decides-how-high-and-how-long/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec and Ankunda G. (2024). Freight Transport and Logistics in National Climate Strategies. Infographic on NDCs. <a href="https://slocat.net/wp-content/uploads/2024/06/KF-infographic_4-pages_final.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2022). Sustainable transport in African cities: Challenges and opportunities through the 15-minute city planning approach. SLOCAT. <a href="https://slocat.net/15-minute-city-planning-african-cities/" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Peet K., Nikola Medimorec, Yiu A. (2020). Infographic on Good Practices on Transport for Climate Action and Sustainable Development. <a href="http://slocat.net/wp-content/uploads/2020/09/IsDB-SLOCAT-Infographic_webuse.pdf" target="_blank" rel="noopener">→ View</a></li>
-        <li>Nikola Medimorec, Gioutsos D. and Ochs A. (2020). Energy and transport profile: Cat Ba Island, Viet Nam. <a href="https://sd-strategies.com/wp-content/uploads/2020/06/Profile_CatBa_Island.pdf" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Ibold S., Nikola Medimorec, Wagner, A. and Peruzzo, J. (2020). The COVID-19 outbreak and implications to sustainable urban mobility. TUMI. <a href="https://www.transformative-mobility.org/news/the-covid-19-outbreak-and-implications-to-public-transport-some-observations" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2020). Seoul to implement record number of transport projects in 2020. <em>Korea Times</em>. <a href="https://www.koreatimes.co.kr/www/nation/2020/01/281_281505.html" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2019). Narrative around Seoul's new bicycle paths plans – masterpiece of storytelling. <em>Korea Times</em>. <a href="https://www.koreatimes.co.kr/www/nation/2019/09/281_274280.html" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2019). In need of Seoul's next transport revolution. <em>Korea Times</em>. <a href="https://www.koreatimes.co.kr/www/nation/2019/07/281_271606.html" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Tebay A. and Nikola Medimorec (2016). A K-Transportation Wave? Korea's smart transport technology is adopted worldwide. <em>KOREA Magazine</em> vol. 12, no. 6, p. 44–45.</li>
-        <li>Nikola Medimorec (2016). Incheon Airport maglev line opens. <em>International Railway Journal</em>. <a href="http://www.railjournal.com/index.php/asia/incheon-airport-maglev-line-opens.html" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2014). Cycling Jeju Island: Tips and recommendations. <em>Jeju Weekly</em>. <a href="http://www.jejuweekly.com/news/articleView.html?idxno=4325" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Nikola Medimorec (2013). Sustainable Transportation: A Basic Human Right. <em>CityNet Asia-Pacific</em>. <a href="https://citynetmembers.wordpress.com/2013/07/29/418/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Ankunda G., Vincent J. and <span class="me">Nikola Medimorec</span> (2026). Freight Transport in Asia: Moving goods, leaving women behind. GSR Explained. <a href="https://gsr4.slocat.net/freight-transport-in-asia-moving-goods-leaving-women-behind/" target="_blank" rel="noopener">→ Read</a></li>
+	    	<li><span class="me">Nikola Medimorec</span>, Vincent J., Gilbert-Patrick C. and Jamdade A. (2026). Transport in NDCs: Doubling in ambition, finance &amp; implementation must follow. GSR Explained. <a href="https://gsr4.slocat.net/transport-in-ndcs-doubling-in-ambition-finance-implementation-must-follow/" target="_blank" rel="noopener">→ Read</a></li>
+	    	<li>Vincent J. and <span class="me">Nikola Medimorec</span> (2026). Overshoot Is Here. Transport Decides How High and How Long. <a href="https://slocat.net/overshoot-is-here-transport-decides-how-high-and-how-long/" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> and Ankunda G. (2024). Freight Transport and Logistics in National Climate Strategies. Infographic on NDCs. <a href="https://slocat.net/wp-content/uploads/2024/06/KF-infographic_4-pages_final.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2022). Sustainable transport in African cities: Challenges and opportunities through the 15-minute city planning approach. SLOCAT. <a href="https://slocat.net/15-minute-city-planning-african-cities/" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Peet K., <span class="me">Nikola Medimorec</span>, Yiu A. (2020). Infographic on Good Practices on Transport for Climate Action and Sustainable Development. <a href="http://slocat.net/wp-content/uploads/2020/09/IsDB-SLOCAT-Infographic_webuse.pdf" target="_blank" rel="noopener">→ View</a></li>
+        <li><span class="me">Nikola Medimorec</span>, Gioutsos D. and Ochs A. (2020). Energy and transport profile: Cat Ba Island, Viet Nam. <a href="https://sd-strategies.com/wp-content/uploads/2020/06/Profile_CatBa_Island.pdf" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Ibold S., <span class="me">Nikola Medimorec</span>, Wagner, A. and Peruzzo, J. (2020). The COVID-19 outbreak and implications to sustainable urban mobility. TUMI. <a href="https://www.transformative-mobility.org/news/the-covid-19-outbreak-and-implications-to-public-transport-some-observations" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2020). Seoul to implement record number of transport projects in 2020. <em>Korea Times</em>. <a href="https://www.koreatimes.co.kr/www/nation/2020/01/281_281505.html" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2019). Narrative around Seoul's new bicycle paths plans – masterpiece of storytelling. <em>Korea Times</em>. <a href="https://www.koreatimes.co.kr/www/nation/2019/09/281_274280.html" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2019). In need of Seoul's next transport revolution. <em>Korea Times</em>. <a href="https://www.koreatimes.co.kr/www/nation/2019/07/281_271606.html" target="_blank" rel="noopener">→ Read</a></li>
+        <li>Tebay A. and <span class="me">Nikola Medimorec</span> (2016). A K-Transportation Wave? Korea's smart transport technology is adopted worldwide. <em>KOREA Magazine</em> vol. 12, no. 6, p. 44–45.</li>
+        <li><span class="me">Nikola Medimorec</span> (2016). Incheon Airport maglev line opens. <em>International Railway Journal</em>. <a href="http://www.railjournal.com/index.php/asia/incheon-airport-maglev-line-opens.html" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2014). Cycling Jeju Island: Tips and recommendations. <em>Jeju Weekly</em>. <a href="http://www.jejuweekly.com/news/articleView.html?idxno=4325" target="_blank" rel="noopener">→ Read</a></li>
+        <li><span class="me">Nikola Medimorec</span> (2013). Sustainable Transportation: A Basic Human Right. <em>CityNet Asia-Pacific</em>. <a href="https://citynetmembers.wordpress.com/2013/07/29/418/" target="_blank" rel="noopener">→ Read</a></li>
       </ul>
     </div>
 
@@ -881,14 +1007,14 @@
       <ul class="pub-list">
         <li>Jon Dunbar (2018). Kojects author maps Seoul Metro aboveground. <em>Korea Times</em>. <a href="https://www.koreatimes.co.kr/www/nation/2018/07/177_252720.html" target="_blank" rel="noopener">→ Read</a></li>
         <li>Pedestrians.org (2017). Pedestrian Environment in Korea. <a href="https://www.youtube.com/watch?v=UtxLJwW4gI4" target="_blank" rel="noopener">→ Watch</a></li>
-        <li>KBS World Radio (2016). Andy Tebay &amp; Nikola Medimorec, Co-authors, KOJECTS. <a href="http://world.kbs.co.kr/service/contents_view.htm?lang=e&menu_cate=people&id=&board_seq=156439&page=4" target="_blank" rel="noopener">→ Listen</a></li>
+        <li>KBS World Radio (2016). Andy Tebay &amp; <span class="me">Nikola Medimorec</span>, Co-authors, KOJECTS. <a href="http://world.kbs.co.kr/service/contents_view.htm?lang=e&menu_cate=people&id=&board_seq=156439&page=4" target="_blank" rel="noopener">→ Listen</a></li>
         <li>Korea Economic Institute (2016). Korea Kontext: Tracking Korea's Transportation System with Kojects. <a href="http://www.keia.org/podcast/tracking-korea%E2%80%99s-transportation-system-kojects" target="_blank" rel="noopener">→ Listen</a></li>
         <li>Colin Marshall (2016). One of Korea's Most Popular Cartoons Is About a Bus. <em>Los Angeles Review of Books</em>. <a href="https://blog.lareviewofbooks.org/the-korea-blog/one-koreas-popular-cartoons-bus/" target="_blank" rel="noopener">→ Read</a></li>
         <li>Fernando Casado Cañeque &amp; Paula García Serna (2016). Towards The Human City, To Global Leaders. <a href="https://vimeo.com/182120189" target="_blank" rel="noopener">→ Watch</a></li>
         <li>Chance Dorland (2016). Seoul Bicycle FAIL: Riders Question Rampless Bike Crossings. <em>KoreaFM</em>. <a href="http://www.koreafm.net/2016/07/seoul-bicycle-fail/" target="_blank" rel="noopener">→ Read</a></li>
         <li>Kyung-min Lee (2016). Bike crossings inconvenient for users. <em>Korea Times</em>. <a href="http://www.koreatimes.co.kr/www/nation/2019/05/113_206705.html" target="_blank" rel="noopener">→ Read</a></li>
-        <li>Notebook on Cities and Culture's Korea Tour: Why Is This Here? with Nikola Medimorec (2014). <a href="http://blog.colinmarshall.org/?p=2625" target="_blank" rel="noopener">→ Listen</a></li>
-        <li>KBS World Radio (2011). Verkehrsplanungspraktikant Nikola Medimorec, Treffen zweier Welten. <a href="http://world.kbs.co.kr/german/program/program_seoulreport_detail.htm?No=3875&current_page=22" target="_blank" rel="noopener">→ Listen</a></li>
+        <li>Notebook on Cities and Culture's Korea Tour: Why Is This Here? with <span class="me">Nikola Medimorec</span> (2014). <a href="http://blog.colinmarshall.org/?p=2625" target="_blank" rel="noopener">→ Listen</a></li>
+        <li>KBS World Radio (2011). Verkehrsplanungspraktikant <span class="me">Nikola Medimorec</span>, Treffen zweier Welten. <a href="http://world.kbs.co.kr/german/program/program_seoulreport_detail.htm?No=3875&current_page=22" target="_blank" rel="noopener">→ Listen</a></li>
       </ul>
     </div>
 
@@ -902,11 +1028,11 @@
   <div class="container">
     <h2 class="section-title">Get in Touch</h2>
     <hr class="section-rule">
-    <p>Get in touch with me. Whether you have a question about sustainable transport, want to collaborate or just want to say hello, feel free to reach out.</p>
-    <div class="contact-links">
-      <a class="btn" href="https://www.linkedin.com/in/nikola-medimorec-b0b72030/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://github.com/nikolamedi" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://orcid.org/0000-0003-2935-7495" target="_blank" rel="noopener">ORCID</a>
+    <div class="contact-row">
+      <p>Get in touch with me. Whether you have a question about sustainable transport, want to collaborate or just want to say hello, feel free to reach out.</p>
+      <div class="contact-links">
+        <a class="btn" href="https://www.linkedin.com/in/nikola-medimorec-b0b72030/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
     </div>
   </div>
 </section>
@@ -924,7 +1050,7 @@
       <svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.184H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.159-5.325 5.159h-3.919V7.416zm1.444 1.303v7.572h2.297c3.272 0 3.9-2.484 3.9-3.861 0-1.691-.819-3.711-3.934-3.711h-2.263z"/></svg>
     </a>
   </div>
-  <p>&copy; 2026 Nikola Medimorec &mdash; All rights reserved</p>
+  <p>&copy; <span id="year">2026</span> Nikola Medimorec &mdash; All rights reserved</p>
 </footer>
 
 <!-- Scroll to top -->
@@ -956,7 +1082,8 @@
 
   // Hamburger
   function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
+    const open = document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('hamburger').setAttribute('aria-expanded', open);
   }
 
   // Close menu on link click
@@ -967,12 +1094,30 @@
   });
 
   // Publication tabs
-  function showTab(id) {
+  function showTab(id, btn) {
     document.querySelectorAll('.pub-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.pub-tab').forEach(t => t.classList.remove('active'));
     document.getElementById('tab-' + id).classList.add('active');
-    event.target.classList.add('active');
+    btn.classList.add('active');
   }
+
+  // Long publication lists: show 10 items, with a button to reveal the rest
+  document.querySelectorAll('.pub-list').forEach(list => {
+    const total = list.children.length;
+    if (total <= 12) return;
+    list.classList.add('collapsed');
+    const btn = document.createElement('button');
+    btn.className = 'show-more';
+    btn.textContent = 'Show all ' + total + ' →';
+    btn.addEventListener('click', () => {
+      const collapsed = list.classList.toggle('collapsed');
+      btn.textContent = collapsed ? 'Show all ' + total + ' →' : 'Show fewer ↑';
+    });
+    list.after(btn);
+  });
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
