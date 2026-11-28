@@ -236,12 +236,18 @@
 
     .design-photo-wrap { flex-shrink: 0; }
 
-    .design-photo {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--rule);
+    .design-morph {
+      display: block;
+      width: 280px;
+      height: auto;
+      aspect-ratio: 240 / 170;
+    }
+    .tm-stroke {
+      fill: none;
+      stroke: #4a4a4a;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     /* ── ABOUT ── */
@@ -594,7 +600,7 @@
       .design-buttons { justify-content: center; }
       .design-socials { justify-content: center; }
       .design-photo-wrap { order: -1; display: flex; justify-content: center; }
-      .design-photo { width: 150px; height: 150px; }
+      .design-morph { width: 220px; }
 
       .about-grid { grid-template-columns: 1fr; }
       .about-photo { max-width: 180px; margin: 0 auto; }
@@ -658,12 +664,20 @@
       </div>
     </div>
     <div class="design-photo-wrap">
-      <img
-        class="design-photo"
-        src="images/nikola_medimorec.jpg"
-        alt="Portrait of Nikola Medimorec"
-        width="200" height="200"
-      />
+      <svg id="tm-stage" class="design-morph" viewBox="0 -20 240 170" role="img"
+           aria-label="Line drawing of a person walking, which turns in turn into a wheelchair user, kick-scooter, bicycle, motorcycle, rickshaw, electric car, bus, truck, tram, train, monorail, cable car, hot air balloon, aeroplane, rocket, container ship and ferry">
+        <defs>
+          <linearGradient id="tm-fade" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#000"/><stop offset=".12" stop-color="#fff"/>
+            <stop offset=".88" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+          </linearGradient>
+          <mask id="tm-edges" maskUnits="userSpaceOnUse" x="0" y="-20" width="240" height="170">
+            <rect y="-20" width="240" height="170" fill="url(#tm-fade)"/>
+          </mask>
+        </defs>
+        <g id="tm-ground" mask="url(#tm-edges)"></g>
+        <g id="tm-vehicle"></g>
+      </svg>
     </div>
   </div>
 </section>
@@ -1118,5 +1132,6 @@
   // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+<script src="js/transport-morph.js" defer></script>
 </body>
 </html>
