@@ -479,6 +479,21 @@
     }
     .work-card:hover { border-color: var(--subtle); }
 
+    /* Thumbnail across the top of the card (16:9, cropped to fit).
+       PNGs live in images/work/; a missing file is simply hidden. */
+    .work-thumb {
+      display: block;
+      width: calc(100% + 3rem);
+      height: auto;
+      max-width: none;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      margin: -1.5rem -1.5rem 1.25rem;
+      border-bottom: 1px solid var(--rule);
+      border-radius: var(--radius) var(--radius) 0 0;
+      background: var(--bg-alt);
+    }
+
     .work-kicker {
       font-size: 0.7rem;
       font-weight: 700;
@@ -766,6 +781,8 @@
     <div class="work-grid">
 
       <article class="work-card">
+        <img class="work-thumb" src="images/work/gsr.png" alt="Thumbnail for the Global Status Report"
+             width="1200" height="675" loading="lazy" onerror="this.remove()">
         <p class="work-kicker">Flagship report · since 2018</p>
         <h3>Transport, Climate and Sustainability Global Status Report (GSR)</h3>
         <p>SLOCAT's flagship report on trends in transport demand, emissions, policies and finance across all modes and regions. Four editions published, the latest in 2025.</p>
@@ -777,6 +794,8 @@
       </article>
 
       <article class="work-card">
+        <img class="work-thumb" src="images/work/ndc-transport-tracker.png" alt="Thumbnail for the NDC Transport Tracker"
+             width="1200" height="675" loading="lazy" onerror="this.remove()">
         <p class="work-kicker">Database · since 2018 · with GIZ</p>
         <h3>NDC Transport Tracker</h3>
         <p>An open database tracking transport targets, measures and policies in Nationally Determined Contributions (NDCs) and long-term strategies, used to assess whether climate commitments put transport on track for 1.5°C.</p>
@@ -789,6 +808,8 @@
       </article>
 
       <article class="work-card">
+        <img class="work-thumb" src="images/work/young-leaders.png" alt="Thumbnail for the Young Leaders in Sustainable Transport programme"
+             width="1200" height="675" loading="lazy" onerror="this.remove()">
         <p class="work-kicker">Mentoring · since 2019 · with VREF</p>
         <h3>Young Leaders in Sustainable Transport</h3>
         <p>A programme to engage young professionals, raising their capacity and connecting their transport expertise to climate change and sustainable development processes, focusing on participants from Africa.</p>
@@ -799,6 +820,8 @@
       </article>
 
       <article class="work-card">
+        <img class="work-thumb" src="images/work/freight.png" alt="Thumbnail for the freight transport and logistics research"
+             width="1200" height="675" loading="lazy" onerror="this.remove()">
         <p class="work-kicker">Research area · since 2022 · freight</p>
         <h3>Freight Transport and Logistics</h3>
         <p>Research on how climate commitments address freight, including a roadmap for transformative action and an assessment of China, India and Viet Nam.</p>
